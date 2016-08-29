@@ -2,6 +2,7 @@
 <link rel="import" href="../paper-menu/paper-menu.html">
 <link rel="import" href="../paper-menu-button/paper-menu-button.html">
 <link rel="import" href="../paper-icon-button/paper-icon-button.html">
+
 <link rel="import" href="plutonium-nation-flags.html">
 
 <!--
@@ -17,7 +18,7 @@ Language picker by nation flags.
             :host {
                 display: block;
             }
-            
+
             ::content iron-icon.flag {
                 width: 16px;
                 height: 16px;
@@ -27,7 +28,9 @@ Language picker by nation flags.
                 margin-right: 4px;
             }
         </style>
-        <paper-menu-button>
+        <paper-menu-button 
+            horizontal-align="right"
+            vertical-align="top">
             <paper-icon-button icon="plutonium-nation-flags:[[lang]]" class="dropdown-trigger"></paper-icon-button>
             <paper-menu class="dropdown-content" attr-for-selected="lang" selected="{{lang}}">
                 <content></content>
@@ -47,10 +50,10 @@ Language picker by nation flags.
             observers: [
                 '_observeCurrentLanguage(lang)'
             ],
-            attached: function() {
+            attached: function () {
                 this.lang = document.documentElement.lang;
             },
-            _observeCurrentLanguage: function(lang) {
+            _observeCurrentLanguage: function (lang) {
                 document.documentElement.lang = lang;
                 console.log('Language changed to ', document.documentElement.lang);
             }
