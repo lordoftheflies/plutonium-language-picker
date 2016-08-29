@@ -1,0 +1,48 @@
+<link rel="import" href="../polymer/polymer.html">
+<link rel="import" href="../paper-menu/paper-menu.html">
+<link rel="import" href="../paper-menu-button/paper-menu-button.html">
+<link rel="import" href="../paper-icon-button/paper-icon-button.html">
+<link rel="import" href="../paper-item/paper-item.html">
+<link rel="import" href="plutonium-nation-flags.html">
+
+<!--
+`plutonium-language-item`
+Language picker by nation flags.
+
+@demo demo/index.html 
+-->
+
+<dom-module id="plutonium-language-item">
+    <template>
+        <style>
+            :host {
+                display: block;
+            }
+
+            :host iron-icon.flag {
+                width: 16px;
+                height: 16px;
+                border-style: solid;
+                border-color: gainsboro;
+                border-width: thin;
+                margin-right: 4px;
+            }
+        </style>
+        <paper-item lang="[[lang]]">
+            <iron-icon icon="plutonium-nation-flags:[[lang]]" class="flag"></iron-icon>
+            <content></content>
+        </paper-item>
+    </template>
+
+    <script>
+        Polymer({
+            is: 'plutonium-language-item',
+            properties: {
+                lang: {
+                    type: String,
+                    value: 'en',
+                }
+            }
+        });
+    </script>
+</dom-module>

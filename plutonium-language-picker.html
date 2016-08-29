@@ -1,0 +1,59 @@
+<link rel="import" href="../polymer/polymer.html">
+<link rel="import" href="../paper-menu/paper-menu.html">
+<link rel="import" href="../paper-menu-button/paper-menu-button.html">
+<link rel="import" href="../paper-icon-button/paper-icon-button.html">
+<link rel="import" href="plutonium-nation-flags.html">
+
+<!--
+`plutonium-language-picker`
+Language picker by nation flags.
+
+@demo demo/index.html 
+-->
+
+<dom-module id="plutonium-language-picker">
+    <template>
+        <style>
+            :host {
+                display: block;
+            }
+            
+            ::content iron-icon.flag {
+                width: 16px;
+                height: 16px;
+                border-style: solid;
+                border-color: gainsboro;
+                border-width: thin;
+                margin-right: 4px;
+            }
+        </style>
+        <paper-menu-button>
+            <paper-icon-button icon="plutonium-nation-flags:[[lang]]" class="dropdown-trigger"></paper-icon-button>
+            <paper-menu class="dropdown-content" attr-for-selected="lang" selected="{{lang}}">
+                <content></content>
+            </paper-menu>
+        </paper-menu-button>
+    </template>
+
+    <script>
+        Polymer({
+            is: 'plutonium-language-picker',
+            properties: {
+                lang: {
+                    type: String,
+                    value: 'en',
+                }
+            },
+            observers: [
+                '_observeCurrentLanguage(lang)'
+            ],
+            attached: function() {
+                this.lang = document.documentElement.lang;
+            },
+            _observeCurrentLanguage: function(lang) {
+                document.documentElement.lang = lang;
+                console.log('Language changed to ', document.documentElement.lang);
+            }
+        });
+    </script>
+</dom-module>
