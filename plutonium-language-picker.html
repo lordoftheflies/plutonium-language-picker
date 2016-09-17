@@ -31,8 +31,8 @@ Language picker by nation flags.
         <paper-menu-button 
             horizontal-align="right"
             vertical-align="top">
-            <paper-icon-button icon="plutonium-nation-flags:[[lang]]" class="dropdown-trigger"></paper-icon-button>
-            <paper-menu class="dropdown-content" attr-for-selected="lang" selected="{{lang}}">
+            <paper-icon-button icon="plutonium-nation-flags:[[_effectiveLang]]" class="dropdown-trigger"></paper-icon-button>
+            <paper-menu class="dropdown-content" attr-for-selected="lang" selected="{{_effectiveLang}}">
                 <content></content>
             </paper-menu>
         </paper-menu-button>
@@ -44,16 +44,26 @@ Language picker by nation flags.
             properties: {
                 lang: {
                     type: String,
+                    notify: true,
                     value: 'en',
+                },
+                _effectiveLang: {
+                    type: String,
+                    notify: true
                 }
             },
             observers: [
-                '_observeCurrentLanguage(lang)'
+                '_observeCurrentLanguage(lang)',
+                '_computeEffectiveLanguage(_effectiveLang)'
             ],
             attached: function () {
                 this.lang = document.documentElement.lang;
             },
             _observeCurrentLanguage: function (lang) {
+                var lts = lang.split(/-|_/);
+                this._effectiveLang = lts[0];
+            },
+            _computeEffectiveLanguage: function(lang) {
                 document.documentElement.lang = lang;
                 console.log('Language changed to ', document.documentElement.lang);
             }
