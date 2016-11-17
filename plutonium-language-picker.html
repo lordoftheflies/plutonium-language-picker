@@ -67,6 +67,7 @@ Language picker by nation flags.
             _computeEffectiveLanguage: function(lang) {
                 document.documentElement.lang = lang;
                 console.log('Language changed to ', document.documentElement.lang);
+                this.fire('change-language', lang);
             }
         });
     </script>
